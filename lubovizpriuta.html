@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Любовь из приюта - Найди друга в Новосибирске</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF7E5F;
+            --secondary: #FEB47B;
+            --accent: #FF3D68;
+            --dark: #2C3E50;
+            --light: #F5F7FA;
+            --success: #4CAF50;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23F5F7FA" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23F5F7FA" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23F5F7FA"/></svg>');
+            background-size: cover;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-family: 'Amatic SC', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: white;
+            background-color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 125, 95, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 125, 95, 0.6);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .filter-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+        
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            background-color: var(--light);
+        }
+        
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .pet-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .pet-card-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .pet-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .pet-card:hover .pet-card-img img {
+            transform: scale(1.1);
+        }
+        
+        .pet-card-content {
+            padding: 1.5rem;
+        }
+        
+        .pet-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .pet-card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .pet-card-meta span {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .pet-card-meta i {
+            margin-right: 0.3rem;
+            color: var(--primary);
+        }
+        
+        .pet-card-shelter {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .pet-card-shelter strong {
+            color: var(--dark);
+        }
+        
+        .pet-card-btn {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .feature-section {
+            background: linear-gradient(135deg, rgba(255,126,95,0.1), rgba(254,180,123,0.1));
+            padding: 4rem 0;
+            margin: 4rem 0;
+            position: relative;
+        }
+        
+        .feature-section::before, .feature-section::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-size: cover;
+        }
+        
+        .feature-section::before {
+            top: -50px;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23F5F7FA" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23F5F7FA" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23F5F7FA"/></svg>');
+        }
+        
+        .feature-section::after {
+            bottom: -50px;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23F5F7FA" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23F5F7FA" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23F5F7FA"/></svg>');
+            transform: rotate(180deg);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+        
+        .footer-logo {
+            font-family: 'Amatic SC', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            color: #bbb;
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-links h3::after, .footer-contact h3::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #bbb;
+        }
+        
+        .footer-contact i {
+            margin-right: 0.8rem;
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        .accessibility-options {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        
+        .accessibility-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            margin-bottom: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .accessibility-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                margin: 0.3rem;
+                padding: 0.5rem;
+            }
+            
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .pets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Любовь из приюта</div>
+        <p class="tagline">Подари дом и любовь бездомному животному из Новосибирска</p>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo-sm" style="font-family: 'Amatic SC', cursive; font-size: 1.8rem; color: var(--primary);">Любовь из приюта</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Главная</a></li>
+                <li><a href="#">Найти питомца</a></li>
+                <li><a href="#">Истории</a></li>
+                <li><a href="#">Как помочь</a></li>
+                <li><a href="#">О проекте</a></li>
+                <li><a href="#">Контакты</a></li>
+                <li><a href="#" class="btn-outline">Войти</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="filter-section">
+            <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--dark);">Найди своего идеального питомца</h2>
+            <form class="filter-form">
+                <div class="form-group">
+                    <label for="type">Тип животного</label>
+                    <select id="type" name="type">
+                        <option value="all">Все животные</option>
+                        <option value="dog">Собаки</option>
+                        <option value="cat">Кошки</option>
+                        <option value="other">Другие</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Возраст</label>
+                    <select id="age" name="age">
+                        <option value="all">Любой возраст</option>
+                        <option value="young">Щенки/котята (до 1 года)</option>
+                        <option value="adult">Молодые (1-3 года)</option>
+                        <option value="mature">Взрослые (3-7 лет)</option>
+                        <option value="senior">Пожилые (7+ лет)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="size">Размер</label>
+                    <select id="size" name="size">
+                        <option value="all">Любой размер</option>
+                        <option value="small">Маленький (до 10 кг)</option>
+                        <option value="medium">Средний (10-25 кг)</option>
+                        <option value="large">Крупный (25+ кг)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="shelter">Приют</label>
+                    <select id="shelter" name="shelter">
+                        <option value="all">Все приюты</option>
+                        <option value="shelter1">Приют "Надежда"</option>
+                        <option value="shelter2">Приют "Доброе сердце"</option>
+                        <option value="shelter3">Приют "Лапа помощи"</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Найти друга</button>
+                </div>
+            </form>
+        </section>
+
+        <section>
+            <div class="section-title">
+                <h2>Наши подопечные</h2>
+                <p>Каждый из этих животных мечтает о любящем хозяине</p>
+            </div>
+            
+            <div class="pets-grid">
+                <div class="pet-card">
+                    <div class="pet-card-img">
+                        <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Рекс - собака из приюта">
+                    </div>
+                    <div class="pet-card-content">
+                        <h3>Рекс</h3>
+                        <div class="pet-card-meta">
+                            <span><i>🐕</i> Собака</span>
+                            <span><i>🎂</i> 3 года</span>
+                            <span><i>📏</i> Крупный</span>
+                        </div>
+                        <p class="pet-card-shelter"><strong>Приют:</strong> "Надежда"</p>
+                        <p>Добрый и игривый пёс, обожает детей, знает базовые команды.</p>
+                        <div class="pet-card-btn">
+                            <a href="#" class="btn">Узнать больше</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pet-card">
+                    <div class="pet-card-img">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Мурка - кошка из приюта">
+                    </div>
+                    <div class="pet-card-content">
+                        <h3>Мурка</h3>
+                        <div class="pet-card-meta">
+                            <span><i>🐈</i> Кошка</span>
+                            <span><i>🎂</i> 1 год</span>
+                            <span><i>📏</i> Маленькая</span>
+                        </div>
+                        <p class="pet-card-shelter"><strong>Приют:</strong> "Доброе сердце"</p>
+                        <p>Ласковая и спокойная, любит сидеть на коленях и мурлыкать.</p>
+                        <div class="pet-card-btn">
+                            <a href="#" class="btn">Узнать больше</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pet-card">
+                    <div class="pet-card-img">
+                        <img src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Бобик - собака из приюта">
+                    </div>
+                    <div class="pet-card-content">
+                        <h3>Бобик</h3>
+                        <div class="pet-card-meta">
+                            <span><i>🐕</i> Собака</span>
+                            <span><i>🎂</i> 5 лет</span>
+                            <span><i>📏</i> Средний</span>
+                        </div>
+                        <p class="pet-card-shelter"><strong>Приют:</strong> "Лапа помощи"</p>
+                        <p>Верный и преданный друг, отличный компаньон для прогулок.</p>
+                        <div class="pet-card-btn">
+                            <a href="#" class="btn">Узнать больше</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn">Смотреть всех животных</a>
+            </div>
+        </section>
+
+        <section class="feature-section">
+            <div class="section-title">
+                <h2>Почему выбирают нас</h2>
+                <p>Мы делаем процесс усыновления простым и приятным</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Только проверенные приюты</h3>
+                    <p>Мы сотрудничаем исключительно с официальными приютами Новосибирска, где за животными хорошо ухаживают</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💖</div>
+                    <h3>Персональный подбор</h3>
+                    <p>Наш алгоритм поможет найти питомца, который идеально подойдет вашему образу жизни и характеру</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Поддержка после усыновления</h3>
+                    <p>Мы не бросаем вас после того, как вы забрали питомца - консультации и помощь всегда доступны</p>
+                </div>
+            </div>
+        </section>
+        
+        <section style="margin-bottom: 4rem;">
+            <div class="section-title">
+                <h2>Истории счастливых усыновлений</h2>
+                <p>Реальные истории людей, которые нашли друга через наш сервис</p>
+            </div>
+            
+            <!-- Здесь будут карточки с историями -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#" class="btn-outline">Читать все истории</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">Любовь из приюта</div>
+                <p>Проект, созданный с любовью к животным и желанием помочь каждому найти своего верного друга.</p>
+                <p>Новосибирск, 2023</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Быстрые ссылки</h3>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Найти питомца</a></li>
+                    <li><a href="#">Как усыновить</a></li>
+                    <li><a href="#">Истории усыновлений</a></li>
+                    <li><a href="#">Как помочь приютам</a></li>
+                    <li><a href="#">О проекте</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Контакты</h3>
+                <p><i>📞</i> Горячая линия: 8-800-123-45-67</p>
+                <p><i>✉️</i> Email: info@lyubov-iz-priyuta.ru</p>
+                <p><i>🏢</i> Новосибирск, ул. Доброты, 15</p>
+                
+                <div style="margin-top: 1.5rem;">
+                    <a href="#" class="btn-outline" style="color: white; border-color: white;">Написать нам</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 Любовь из приюта. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <div class="accessibility-options">
+        <button class="accessibility-btn" title="Высокая контрастность">👁️</button>
+        <button class="accessibility-btn" title="Увеличить шрифт">A+</button>
+        <button class="accessibility-btn" title="Ч/Б режим">⚪</button>
+    </div>
+
+    <script>
+        // Простые функции для демонстрации доступности
+        document.querySelector('.accessibility-btn:nth-child(1)').addEventListener('click', function() {
+            document.body.classList.toggle('high-contrast');
+            if (document.body.classList.contains('high-contrast')) {
+                document.body.style.backgroundColor = '#000';
+                document.body.style.color = '#fff';
+            } else {
+                document.body.style.backgroundColor = '';
+                document.body.style.color = '';
+            }
+        });
+
+        document.querySelector('.accessibility-btn:nth-child(2)').addEventListener('click', function() {
+            const currentSize = parseFloat(getComputedStyle(document.body).fontSize);
+            document.body.style.fontSize = (currentSize + 2) + 'px';
+        });
+
+        document.querySelector('.accessibility-btn:nth-child(3)').addEventListener('click', function() {
+            document.body.classList.toggle('grayscale');
+            if (document.body.classList.contains('grayscale')) {
+                document.body.style.filter = 'grayscale(100%)';
+            } else {
+                document.body.style.filter = '';
+            }
+        });
+    </script>
+</body>
+</html>
